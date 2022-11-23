@@ -1,14 +1,36 @@
+import 'package:flu/common/services/auth_service.dart';
 import 'package:flu/features/auth/screens/auth_screen.dart';
+import 'package:flu/features/home/screens/home_screen.dart';
+import 'package:flu/providers/user.provider.dart';
 import 'package:flu/router.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'constants/global_variables.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+    ),
+  ], child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AuthService authService = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+    authService.getUserData(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +44,14 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           elevation: 0,
           iconTheme: IconThemeData(
-            color:
-            Colors.black,
+            color: Colors.black,
           ),
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: const AuthScreen(),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? const HomeScreen()
+          : const AuthScreen(),
     );
   }
 }
