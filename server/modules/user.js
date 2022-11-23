@@ -22,10 +22,24 @@ const userSchema = mongoose.Schema({
     password: {
         required: true,
         type: String,
+        validate: {
+            validator: (value) => {
+                return value.length > 6;
+            },
+            message: 'Please enter a long password'
+        },
     },
 
     address: {
         type: String,
         default: '',
     },
+    type: {
+        type: String,
+        default: 'user',
+    },
+    // cart
 })
+
+const User = mongoose.model("User", userSchema);
+module.exports = User;

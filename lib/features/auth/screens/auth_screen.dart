@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../../../constants/global_variables.dart';
 
 enum Auth {
-  singin,
-  singup,
+  signin,
+  signup,
 }
 
 class AuthScreen extends StatefulWidget {
@@ -19,9 +19,9 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  Auth _auth = Auth.singup;
-  final _singUpFormKey = GlobalKey<FormState>();
-  final _singInFormKey = GlobalKey<FormState>();
+  Auth _auth = Auth.signup;
+  final _signUpFormKey = GlobalKey<FormState>();
+  final _signInFormKey = GlobalKey<FormState>();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -53,7 +53,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
               ListTile(
-                tileColor: _auth == Auth.singup ? GlobalVariables.backgroundColor : GlobalVariables.greyBackgroundColor,
+                tileColor: _auth == Auth.signup ? GlobalVariables.backgroundColor : GlobalVariables.greyBackgroundColor,
                 title: const Text(
                   "Create Account",
                   style: TextStyle(
@@ -62,7 +62,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 leading: Radio(
                   activeColor: GlobalVariables.secondaryColor,
-                  value: Auth.singup,
+                  value: Auth.signup,
                   groupValue: _auth,
                   onChanged: (Auth? val) {
                     setState(() {
@@ -71,12 +71,12 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
                 ),
               ),
-              if (_auth == Auth.singup)
+              if (_auth == Auth.signup)
                 Container(
                   padding: const EdgeInsets.all(8),
                   color: GlobalVariables.backgroundColor,
                   child: Form(
-                    key: _singUpFormKey,
+                    key: _signUpFormKey,
                     child: Column(
                       children: [
                         CustomTextField(
@@ -95,7 +95,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         const SizedBox(height: 10),
                         CustomButton(
-                          text: "Sing Up",
+                          text: "Sign Up",
                           onTap: () {
 
                           },
@@ -105,18 +105,18 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
               ListTile(
-                tileColor: _auth == Auth.singin
+                tileColor: _auth == Auth.signin
                     ? GlobalVariables.backgroundColor
                     : GlobalVariables.greyBackgroundColor,
                 title: const Text(
-                  "Sing-In!",
+                  "Sign-In!",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 leading: Radio(
                   activeColor: GlobalVariables.secondaryColor,
-                  value: Auth.singin,
+                  value: Auth.signin,
                   groupValue: _auth,
                   onChanged: (Auth? val) {
                     setState(() {
@@ -125,12 +125,12 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
                 ),
               ),
-              if (_auth == Auth.singin)
+              if (_auth == Auth.signin)
                 Container(
                   padding: const EdgeInsets.all(8),
                   color: GlobalVariables.backgroundColor,
                   child: Form(
-                    key: _singUpFormKey,
+                    key: _signUpFormKey,
                     child: Column(
                       children: [
                         const SizedBox(height: 10),
@@ -145,7 +145,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         const SizedBox(height: 10),
                         CustomButton(
-                          text: "Sing Up",
+                          text: "Sign Up",
                           onTap: () {
 
                           },

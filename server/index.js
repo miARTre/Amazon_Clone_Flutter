@@ -2,7 +2,7 @@
 // import 'package:express/express.dart'
 
 const express = require('express');
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 // IMPORT FROM OTHER FILES
 const authRouter = require('./routes/auth');
@@ -14,7 +14,9 @@ const DB = "mongodb+srv://admin:admin@cluster0.c8pqcy5.mongodb.net/?retryWrites=
 
 // middleware
 // CLIENT -> middleware -> SERVER -> CLIENT
+app.use(express.json());
 app.use(authRouter);
+
 
 // CONNECTIONS
 mongoose.connect(DB).then(() => {
@@ -23,7 +25,7 @@ mongoose.connect(DB).then(() => {
     console.log(e)
 })
 
-app.listen(PORT,  () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Connected at port: ${PORT}`);
 })
 
