@@ -10,7 +10,7 @@ const authRouter = require('./routes/auth');
 // INIT
 const PORT = 3000;
 const app = express();
-const DB = "mongodb+srv://admin:admin@cluster0.c8pqcy5.mongodb.net/?retryWrites=true&w=majority";
+const DB = "mongodb+srv://admin:<password>@cluster0.c8pqcy5.mongodb.net/?retryWrites=true&w=majority";
 
 // middleware
 // CLIENT -> middleware -> SERVER -> CLIENT

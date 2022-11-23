@@ -1,11 +1,15 @@
+import 'package:flu/constants/error_handling.dart';
 import 'package:flu/constants/global_variables.dart';
+import 'package:flu/constants/utils.dart';
 import 'package:flu/models/user.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
   // sign up user
 
   void signUpUser({
+    required BuildContext context,
     required String email,
     required String password,
     required String name,
@@ -27,6 +31,15 @@ class AuthService {
           "Content-Type": "application/json; charset=UTF-8",
         },
       );
-    } catch (e) {}
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          showSnackBar(context, "Account created! Login with same credentials");
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
   }
 }
