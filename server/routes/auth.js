@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../modules/user");
 const bcryptjs = require('bcryptjs');
 const authRouter = express.Router();
+const jwt = require("jsonwebtoken")
 
 // authRouter.get('/user', (req, res) => {
 //     res.json({msg: "Mire"})
@@ -9,7 +10,7 @@ const authRouter = express.Router();
 
 
 // SIGN UP
-authRouter.post('/api/singup', async (req, res) => {
+authRouter.post('/api/signup', async (req, res) => {
 // get the data from the client
 // post that data in DB
 // return that data to the user
@@ -35,6 +36,37 @@ authRouter.post('/api/singup', async (req, res) => {
         res.status(500).json({error: e.message});
     }
 
+})
+
+// Sign In Routes
+authRouter.post('/api/signin', async (req, res) => {
+
+    try {
+        const {email, password} = req.body;
+
+        const user = await User.findOne({email});
+        if (!user) {
+            return res.status(400).json({msg: "User with this email does not exist!"});
+        }
+        //Match password
+        const isMatch = await bcryptjs.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({msg: "Incorrect password!"});
+        }
+
+        const token = jwt.sign({id: user._id}, "passwordKey");
+
+        res.json({token, ...user._doc});
+
+        //  {
+        //  "token" : "token"
+        //  "name" : "Mirnes Becirbegovic",
+        //  "email" : "mirnesbb@gmail.com",
+        //   }
+
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
 })
 
 module.exports = authRouter;

@@ -9,6 +9,30 @@ class User {
   final String type;
   final String token;
 
+  // Map<String, dynamic> asObject() {
+  //   return {
+  //     "id": id,
+  //     "name": name,
+  //     "email": email,
+  //     "password": password,
+  //     "address": address,
+  //     "type": type,
+  //     "token": token,
+  //   };
+  // }
+
+  // factory User.fromJson(Map<String, dynamic> json) {
+  //   return User(
+  //     id: json["_id"],
+  //     name: json["name"],
+  //     email: json["email"],
+  //     password: json["password"],
+  //     address: json["address"],
+  //     type: json["type"],
+  //     token: json["token"],
+  //   );
+  // }
+
   User(
       {required this.id,
       required this.name,
@@ -34,7 +58,7 @@ class User {
     return {
       "id": id,
       "name": name,
-      "email" : email,
+      "email": email,
       "password": password,
       "address": address,
       "type": type,
