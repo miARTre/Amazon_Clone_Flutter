@@ -1,4 +1,5 @@
 import 'package:flu/constants/global_variables.dart';
+import 'package:flu/features/account/widgets/single_product.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget {
@@ -9,13 +10,13 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-
   // Temporary list
 
   List list = [
-    {
-      'image': ''
-    }
+    "https://images.unsplash.com/photo-1661961110218-35af7210f803?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1661961110218-35af7210f803?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1661961110218-35af7210f803?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1661961110218-35af7210f803?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
   ];
 
   @override
@@ -59,10 +60,14 @@ class _OrdersState extends State<Orders> {
             right: 0,
           ),
           child: ListView.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) {
-
-          }),
+            scrollDirection: Axis.horizontal,
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              return SingleProduct(
+                image: list[index],
+              );
+            },
+          ),
         ),
       ],
     );
