@@ -1,4 +1,5 @@
 import 'package:flu/common/services/auth_service.dart';
+import 'package:flu/common/widgets/bottom_bar.dart';
 import 'package:flu/features/auth/screens/auth_screen.dart';
 import 'package:flu/features/home/screens/home_screen.dart';
 import 'package:flu/providers/user.provider.dart';
@@ -50,7 +51,7 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const HomeScreen()
+          ? const BottomBar()
           : const AuthScreen(),
     );
   }
