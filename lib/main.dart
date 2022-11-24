@@ -1,7 +1,7 @@
 import 'package:flu/common/services/auth_service.dart';
 import 'package:flu/common/widgets/bottom_bar.dart';
+import 'package:flu/features/admin/screens/admin_screen.dart';
 import 'package:flu/features/auth/screens/auth_screen.dart';
-import 'package:flu/features/home/screens/home_screen.dart';
 import 'package:flu/providers/user.provider.dart';
 import 'package:flu/router.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Amazon Clone',
       theme: ThemeData(
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
@@ -51,7 +52,9 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const BottomBar()
+          ? Provider.of<UserProvider>(context).user.type == 'user'
+              ? const BottomBar()
+              : const AdminScreen()
           : const AuthScreen(),
     );
   }

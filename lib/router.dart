@@ -1,4 +1,5 @@
 import 'package:flu/common/widgets/bottom_bar.dart';
+import 'package:flu/features/admin/screens/add_product_screen.dart';
 import 'package:flu/features/auth/screens/auth_screen.dart';
 import 'package:flu/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,13 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const BottomBar(),
       );
+
+    case AddProductScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const AddProductScreen(),
+      );
+
     default:
       return MaterialPageRoute(
         settings: routeSettings,
