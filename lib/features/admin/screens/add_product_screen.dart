@@ -4,11 +4,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flu/common/widgets/custom_button.dart';
 import 'package:flu/common/widgets/custom_textfield.dart';
+import 'package:flu/constants/global_variables.dart';
 import 'package:flu/constants/utils.dart';
 import 'package:flu/features/admin/services/admin_services.dart';
 import 'package:flutter/material.dart';
-
-import '../../../constants/global_variables.dart';
 
 class AddProductScreen extends StatefulWidget {
   static const String routeName = '/add-product';
@@ -21,10 +20,9 @@ class AddProductScreen extends StatefulWidget {
 
 class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController productNameController = TextEditingController();
-  final TextEditingController descriptionNameController =
-      TextEditingController();
-  final TextEditingController priceNameController = TextEditingController();
-  final TextEditingController quantityNameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController quantityController = TextEditingController();
   final AdminServices adminServices = AdminServices();
 
   String category = 'Mobiles';
@@ -34,29 +32,28 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   void dispose() {
     super.dispose();
-
-    priceNameController.dispose();
-    descriptionNameController.dispose();
-    priceNameController.dispose();
-    quantityNameController.dispose();
+    productNameController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+    quantityController.dispose();
   }
 
   List<String> productCategories = [
     'Mobiles',
     'Essentials',
     'Appliances',
-    "Books",
-    "Fashion",
+    'Books',
+    'Fashion',
   ];
 
-  void sellProduct() async {
+  void sellProduct() {
     if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
       adminServices.sellProduct(
         context: context,
         name: productNameController.text,
-        description: descriptionNameController.text,
-        price: double.parse(priceNameController.text),
-        quantity: double.parse(quantityNameController.text),
+        description: descriptionController.text,
+        price: double.parse(priceController.text),
+        quantity: double.parse(quantityController.text),
         category: category,
         images: images,
       );
@@ -94,9 +91,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 images.isNotEmpty
                     ? CarouselSlider(
                         items: images.map((i) {
@@ -148,38 +143,28 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           ),
                         ),
                       ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 CustomTextField(
                   controller: productNameController,
                   hintText: 'Product Name',
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomTextField(
-                  controller: descriptionNameController,
+                  controller: descriptionController,
                   hintText: 'Description',
                   maxLines: 7,
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomTextField(
-                  controller: priceNameController,
+                  controller: priceController,
                   hintText: 'Price',
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomTextField(
-                  controller: quantityNameController,
+                  controller: quantityController,
                   hintText: 'Quantity',
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 SizedBox(
                   width: double.infinity,
                   child: DropdownButton(
@@ -198,11 +183,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     },
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 CustomButton(
-                  text: "Sell",
+                  text: 'Sell',
                   onTap: sellProduct,
                 ),
               ],

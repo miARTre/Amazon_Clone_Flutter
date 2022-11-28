@@ -4,7 +4,6 @@ import 'package:flu/common/widgets/bottom_bar.dart';
 import 'package:flu/constants/error_handling.dart';
 import 'package:flu/constants/global_variables.dart';
 import 'package:flu/constants/utils.dart';
-import 'package:flu/features/home/screens/home_screen.dart';
 import 'package:flu/models/user.dart';
 import 'package:flu/providers/user.provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -86,7 +85,7 @@ class AuthService {
         onSuccess: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-          await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
+          prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
           Navigator.pushNamedAndRemoveUntil(
             context,
             BottomBar.routeName,
@@ -140,5 +139,3 @@ class AuthService {
     }
   }
 }
-
-

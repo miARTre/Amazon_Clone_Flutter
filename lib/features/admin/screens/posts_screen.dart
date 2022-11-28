@@ -10,9 +10,9 @@ class PostsScreen extends StatefulWidget {
 
 class _PostsScreenState extends State<PostsScreen> {
 
-  void navigateToAddProduct() {
-    Navigator.pushNamed(context, AddProductScreen.routeName);
-  }
+   void navigateToAddProduct() {
+     Navigator.pushNamed(context, AddProductScreen.routeName);
+   }
 
   @override
   Widget build(BuildContext context) {

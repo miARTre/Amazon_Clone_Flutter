@@ -2,14 +2,13 @@ import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flu/constants/error_handling.dart';
+import 'package:flu/constants/global_variables.dart';
 import 'package:flu/constants/utils.dart';
 import 'package:flu/models/product.dart';
 import 'package:flu/providers/user.provider.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-
-import '../../../constants/global_variables.dart';
 
 class AdminServices {
   void sellProduct({
@@ -26,7 +25,7 @@ class AdminServices {
       final cloudinary = CloudinaryPublic('ddumlhq0r', 'rysvhv6w');
       List<String> imageUrls = [];
 
-      for (int i = 0; i < images.length; i++) {
+      for (int i = 0; i < imageUrls.length; i++) {
         CloudinaryResponse res = await cloudinary.uploadFile(
           CloudinaryFile.fromFile(images[i].path, folder: name),
         );
@@ -55,7 +54,7 @@ class AdminServices {
         response: res,
         context: context,
         onSuccess: () {
-          showSnackBar(context, 'Product Added Successfully!');
+          showSnackBar(context, 'Product Add Successfully');
           Navigator.pop(context);
         },
       );

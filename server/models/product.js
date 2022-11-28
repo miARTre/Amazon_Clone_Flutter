@@ -17,7 +17,7 @@ const productSchema = mongoose.Schema({
             required: true
         },
     ],
-    quality: {
+    quantity: {
         type: Number,
         required: true,
     },
@@ -32,5 +32,5 @@ const productSchema = mongoose.Schema({
     //ratings
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model("Product", productSchema);
 module.exports = Product;
