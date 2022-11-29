@@ -25,9 +25,10 @@ adminRouter.post('/admin/add-product', admin, async (req, res) => {
         res.status(500).json({error: e.message});
     }
 
-    // GET ALL YOUR PRODUCTS
-    // API NAME => admin/get-products
 })
+
+// GET ALL YOUR PRODUCTS
+// API NAME => admin/get-products
 
 adminRouter.get('/admin/get-products', admin, async (req, res) => {
     // console.log('aaa');
