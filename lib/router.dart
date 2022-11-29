@@ -1,6 +1,7 @@
 import 'package:flu/common/widgets/bottom_bar.dart';
 import 'package:flu/features/admin/screens/add_product_screen.dart';
 import 'package:flu/features/auth/screens/auth_screen.dart';
+import 'package:flu/features/home/screens/category_deals_screens.dart';
 import 'package:flu/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         builder: (_) => const HomeScreen(),
       );
 
-      case BottomBar.routeName:
+    case BottomBar.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const BottomBar(),
@@ -28,6 +29,13 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const AddProductScreen(),
+      );
+
+    case CategoryDealsScreen.routeName:
+      var category = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => CategoryDealsScreen(category: category),
       );
 
     default:
