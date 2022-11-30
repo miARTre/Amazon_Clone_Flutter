@@ -13,12 +13,26 @@ const auth = require('../middlewares/auth')
 productRouter.get('/api/products', auth, async (req, res) => {
     // console.log('aaa');
     try {
-        console.log(req.query.category);
+        // console.log(req.query.category);
         const products = await Product.find({category: req.query.category});
         res.json(products);
     } catch (e) {
         res.status(500).json({error: e.message})
     }
+})
+// ap/products/search/i
+productRouter.get('/api/products/search/:name', auth, async (req, res) => {
+    try {
+        const products = await Product.find({
+            name: {$regex: req.params.name, $options: "i"},
+            // name: req.params.name,
+        });
+
+        res.json(products);
+    } catch (e) {
+        res.status(500).json({error: e.message})
+    }
+
 })
 
 module.exports = productRouter;
