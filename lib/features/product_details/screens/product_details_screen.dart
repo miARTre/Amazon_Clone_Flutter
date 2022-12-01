@@ -13,7 +13,6 @@ import 'package:provider/provider.dart';
 class ProductDetailScreen extends StatefulWidget {
   static const String routeName = '/product-details';
   final Product product;
-
   const ProductDetailScreen({
     Key? key,
     required this.product,
@@ -25,8 +24,7 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   final ProductDetailsServices productDetailsServices =
-      ProductDetailsServices();
-
+  ProductDetailsServices();
   double avgRating = 0;
   double myRating = 0;
 
@@ -41,6 +39,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         myRating = widget.product.rating![i].rating;
       }
     }
+
     if (totalRating != 0) {
       avgRating = totalRating / widget.product.rating!.length;
     }
@@ -48,6 +47,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
+  void addToCart() {
+    productDetailsServices.addToCart(
+      context: context,
+      product: widget.product,
+    );
   }
 
   @override
@@ -105,7 +111,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             width: 1,
                           ),
                         ),
-                        hintText: 'Search Amazon',
+                        hintText: 'Search Amazon.in',
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17,
@@ -118,14 +124,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Container(
                 color: Colors.transparent,
                 height: 42,
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                child: const Icon(
-                  Icons.mic,
-                  color: Colors.black,
-                  size: 25,
-                ),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: const Icon(Icons.mic, color: Colors.black, size: 25),
               ),
             ],
           ),
@@ -140,7 +140,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(widget.product.id!),
+                  Text(
+                    widget.product.id!,
+                  ),
                   Stars(
                     rating: avgRating,
                   ),
@@ -160,15 +162,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
             CarouselSlider(
-              items: widget.product.images.map((i) {
-                return Builder(
-                  builder: (BuildContext context) => Image.network(
-                    i,
-                    fit: BoxFit.contain,
-                    height: 200,
-                  ),
-                );
-              }).toList(),
+              items: widget.product.images.map(
+                    (i) {
+                  return Builder(
+                    builder: (BuildContext context) => Image.network(
+                      i,
+                      fit: BoxFit.contain,
+                      height: 200,
+                    ),
+                  );
+                },
+              ).toList(),
               options: CarouselOptions(
                 viewportFraction: 1,
                 height: 300,
@@ -216,20 +220,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 onTap: () {},
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(10),
               child: CustomButton(
                 text: 'Add to Cart',
-                onTap: () {},
+                onTap: addToCart,
                 color: const Color.fromRGBO(254, 216, 19, 1),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Container(
               color: Colors.black12,
               height: 5,
@@ -250,9 +250,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
-              itemPadding: const EdgeInsets.symmetric(
-                horizontal: 4,
-              ),
+              itemPadding: const EdgeInsets.symmetric(horizontal: 4),
               itemBuilder: (context, _) => const Icon(
                 Icons.star,
                 color: GlobalVariables.secondaryColor,
@@ -264,7 +262,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   rating: rating,
                 );
               },
-            ),
+            )
           ],
         ),
       ),
