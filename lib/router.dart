@@ -1,4 +1,5 @@
 import 'package:flu/common/widgets/bottom_bar.dart';
+import 'package:flu/features/address/screens/address_screen.dart';
 import 'package:flu/features/admin/screens/add_product_screen.dart';
 import 'package:flu/features/auth/screens/auth_screen.dart';
 import 'package:flu/features/home/screens/category_deals_screens.dart';
@@ -56,6 +57,15 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => ProductDetailScreen(
           product: product,
+        ),
+      );
+
+    case AddressScreen.routeName:
+      var totalAmount = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => AddressScreen(
+          totalAmount: totalAmount,
         ),
       );
 
